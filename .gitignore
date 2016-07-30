@@ -7,4 +7,3 @@ client/lib
 server/config.js
 stormpath.yml
 .DS_Store
-npm-debug.log
