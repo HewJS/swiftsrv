@@ -36,6 +36,7 @@ var roundEntries = function(arr) {
 };
 
 // Output: The training data corresponding to frontEndData
+// See "example.js" for an example of what the frontEndData looks like
 var frontEndToTrainingData = function(frontEndData) {
   return frontEndData.map(function(frontEndEntry) {
     var inputIndex = possibleMoods.indexOf(frontEndEntry.mood);
