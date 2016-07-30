@@ -2,8 +2,8 @@ const db = require('../database/config');
 const DataEntry = require('../database/model/dataModel');
 
 const get = (req, res) => {
-  DataEntry.find((err, users) => {
-    res.status(200).send(users);
+  DataEntry.find((err, data) => {
+    res.status(200).send(data);
   });
 };
 
