@@ -154,4 +154,16 @@ module.exports = {
 
   },
 
+  consult: function(req, res, next) {
+
+    console.log('I`m feeling: ', req.body);
+
+    let response = {
+      type: 'JUST DO IT'
+    };
+
+    res.status(201).send(response);
+
+  }
+
 };
