@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var synaptic = require('synaptic');
 
 var Neuron = synaptic.Neuron;
@@ -12,28 +13,11 @@ var possibleMoods = ['Happy', 'Sad'];
 var possibleTypes = ['Popular', 'Italian', 'Mexican'];
 var possibleKeywords = ['', 'Pasta', 'Chipotle'];
 
-// Output: An array of zeros of length n
-var zerosArr = function(n, currArr) {
-  currArr = currArr || [];
-
-  if (n === 0) {
-    return currArr;
-  }
-
-  return zerosArr(n-1, currArr.concat([0]));
-};
-
 // Output: An array of zeros of length n, save for a 1 at the "indices"
 var makeOneArr = function(n, indices) {
-  var blankArr = zerosArr(n);
-
-  blankArr.forEach(function(entry, i) {
-    if (indices.indexOf(i) >= 0) {
-      blankArr[i] = 1;
-    }
+  return _.range(n).map(function(entry, i) {
+    return indices.indexOf(i) >= 0 ? 1 : 0;
   });
-
-  return blankArr;
 };
 
 // Output: A rounded version of arr
