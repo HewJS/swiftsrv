@@ -55,7 +55,11 @@ var frontEndToTrainingData = function(frontEndData) {
 
 // Output: A neural network which is trained with the frontEndData
 var createNetwork = function(frontEndData) {
-  var newNet = new Architect.Perceptron(possibleMoods.length, 10, possibleCategories.length);
+  var newNet = new Architect.Perceptron(
+    possibleMoods.length,
+    Math.max(possibleMoods.length, possibleCategories.length),
+    possibleCategories.length
+  );
 
   var trainingOptions = {
     rate: .1,
