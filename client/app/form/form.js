@@ -15,7 +15,14 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
       happy: false,
       sad: false,
       crying: false,
-      lazy: false
+      lazy: false,
+      energetic: false,
+      drunk: false,
+      nervous: false,
+      tired: false,
+      angry: false,
+      sick: false,
+      smug: false
     }
   };
 
