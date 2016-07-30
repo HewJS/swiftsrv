@@ -53,11 +53,11 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   };
 
   $scope.orderFood = function(){
-    $window.location.href = $scope.data.eat24_url;
+    $window.location.href = $scope.data.eat24;
   }
 
   $scope.reserve = function(){
-    $window.location.href = $scope.data.reservation_url;
+    $window.location.href = $scope.data.reservation;
   }
 
 });
