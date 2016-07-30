@@ -4,7 +4,8 @@
   "description": "> Pithy project description",
   "main": "index.js",
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install && grunt build",
+    "start": "grunt build && node index.js",
+    "postinstall": "./node_modules/bower/bin/bower install",
     "test": "mocha test/dbTest.js"
   },
   "engines": {
