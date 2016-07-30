@@ -68,7 +68,7 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
       method: 'POST',
       url: '/api/brain',
       data: $scope.brain
-    }).then(res => {
+    }).then(function(res) {
       $scope.category = res.data.type;
     });
   };
