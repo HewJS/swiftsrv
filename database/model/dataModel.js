@@ -13,4 +13,6 @@ const dataSchema = new mongoose.Schema({
   selected: Object
 });
 
-export { dataSchema };
+const DataEntry = mongoose.model('DataEntry', dataSchema);
+
+export { DataEntry };
