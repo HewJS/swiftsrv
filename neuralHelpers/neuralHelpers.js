@@ -42,33 +42,6 @@ var roundEntries = function(arr) {
   return arr.map(Math.round);
 };
 
-// Output: The training data corresponding to frontEndData
-// See "example.js" for an example of what the frontEndData looks like
-var frontEndToTrainingData = function(frontEndData) {
-  return frontEndData.map(function(frontEndEntry) {
-    var inputIndices = emoticonsToMoodIndices(frontEndEntry.emoticons);
-
-    var outputIndex1 = possibleTypes.indexOf(frontEndEntry.selected.type);
-    var outputIndex2 = possibleKeywords.indexOf(frontEndEntry.selected.keyword);
-
-    if (outputIndex1 === -1) {
-      outputIndex1 = 0;
-    }
-
-    if (outputIndex2 === -1) {
-      outputIndex2 = 0;
-    }
-
-    return {
-      input: makeOneArr(possibleMoods.length, inputIndices),
-      output: makeOneArr(
-        possibleTypes.length + possibleKeywords.length,
-        [outputIndex1, possibleTypes.length + outputIndex2]
-      )
-    };
-  });
-};
-
 // Output: The result of converting the passed emoticons object
 // to its correponding mood indices
 var emoticonsToMoodIndices = function(emoticons) {
@@ -78,6 +51,33 @@ var emoticonsToMoodIndices = function(emoticons) {
 
   return moodsArr.map(function(mood) {
     return possibleMoods.indexOf(mood);
+  });
+};
+
+// Output: The training data corresponding to frontEndData
+// See "example.js" for an example of what the frontEndData looks like
+var frontEndToTrainingData = function(frontEndData) {
+  return frontEndData.map(function(frontEndEntry) {
+    var inputIndices = emoticonsToMoodIndices(frontEndEntry.emoticons);
+
+    var typeIndex = possibleTypes.indexOf(frontEndEntry.selected.type);
+    var keywordIndex = possibleKeywords.indexOf(frontEndEntry.selected.keyword);
+
+    if (typeIndex === -1) {
+      typeIndex = 0;
+    }
+
+    if (keywordIndex === -1) {
+      keywordIndex = 0;
+    }
+
+    return {
+      input: makeOneArr(possibleMoods.length, inputIndices),
+      output: makeOneArr(
+        possibleTypes.length + possibleKeywords.length,
+        [typeIndex, possibleTypes.length + keywordIndex]
+      )
+    };
   });
 };
 
