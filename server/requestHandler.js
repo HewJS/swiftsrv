@@ -53,7 +53,7 @@ var constructQuery = function(searchParam){
 
   var fullParams = _.extend(params, searchParam, Yelp);
 
-
+  fullParams.actionlinks = true;
   var signature = oauthSignature.generate('GET', baseurl, fullParams, Yelp.consumersecret, Yelp.tokensecret, { encodeSignature: true});
 
   fullParams.oauth_signature = signature;
