@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var synaptic = require('synaptic');
 
 var Neuron = synaptic.Neuron;
@@ -7,26 +8,16 @@ var Trainer = synaptic.Trainer;
 var Architect = synaptic.Architect;
 
 // These can be changed at your leisure!
-// In particular, the first category is the 'default' category
+// In particular, the first type/keyword is the 'default' type/keyword
 var possibleMoods = ['Happy', 'Sad'];
-var possibleCategories = ['Popular', 'Italian', 'Chipotle'];
+var possibleTypes = ['Popular', 'Italian', 'Mexican'];
+var possibleKeywords = ['', 'Pasta', 'Chipotle'];
 
-// Output: An array of zeros of length n
-var zerosArr = function(n, currArr) {
-  currArr = currArr || [];
-
-  if (n === 0) {
-    return currArr;
-  }
-
-  return zerosArr(n-1, currArr.concat([0]));
-};
-
-// Output: An array of zeros of length n, save for a 1 at the ith index
-var makeOneArr = function(n, i) {
-  var blankArr = zerosArr(n);
-  blankArr[i] = 1;
-  return blankArr;
+// Output: An array of zeros of length n, save for a 1 at the "indices"
+var makeOneArr = function(n, indices) {
+  return _.range(n).map(function(entry, i) {
+    return indices.indexOf(i) >= 0 ? 1 : 0;
+  });
 };
 
 // Output: A rounded version of arr
@@ -35,20 +26,41 @@ var roundEntries = function(arr) {
   return arr.map(Math.round);
 };
 
+// Output: The result of converting the passed emoticons object
+// to its correponding mood indices
+var emoticonsToMoodIndices = function(emoticons) {
+  var moodsArr = Object.keys(emoticons).filter(function(emoticonKey) {
+    return emoticons[emoticonKey] === 1;
+  });
+
+  return moodsArr.map(function(mood) {
+    return possibleMoods.indexOf(mood);
+  });
+};
+
 // Output: The training data corresponding to frontEndData
 // See "example.js" for an example of what the frontEndData looks like
 var frontEndToTrainingData = function(frontEndData) {
   return frontEndData.map(function(frontEndEntry) {
-    var inputIndex = possibleMoods.indexOf(frontEndEntry.mood);
-    var outputIndex = possibleCategories.indexOf(frontEndEntry.category);
+    var inputIndices = emoticonsToMoodIndices(frontEndEntry.emoticons);
 
-    if (outputIndex === -1) {
-      outputIndex = 0;
+    var typeIndex = possibleTypes.indexOf(frontEndEntry.selected.type);
+    var keywordIndex = possibleKeywords.indexOf(frontEndEntry.selected.keyword);
+
+    if (typeIndex === -1) {
+      typeIndex = 0;
+    }
+
+    if (keywordIndex === -1) {
+      keywordIndex = 0;
     }
 
     return {
-      input: makeOneArr(possibleMoods.length, inputIndex),
-      output: makeOneArr(possibleCategories.length, outputIndex)
+      input: makeOneArr(possibleMoods.length, inputIndices),
+      output: makeOneArr(
+        possibleTypes.length + possibleKeywords.length,
+        [typeIndex, possibleTypes.length + keywordIndex]
+      )
     };
   });
 };
@@ -57,8 +69,8 @@ var frontEndToTrainingData = function(frontEndData) {
 var createNetwork = function(frontEndData) {
   var newNet = new Architect.Perceptron(
     possibleMoods.length,
-    Math.max(possibleMoods.length, possibleCategories.length),
-    possibleCategories.length
+    Math.max(possibleMoods.length, possibleTypes.length + possibleKeywords.length),
+    possibleTypes.length + possibleKeywords.length
   );
 
   var trainingOptions = {
@@ -73,15 +85,21 @@ var createNetwork = function(frontEndData) {
 };
 
 // Output: A sting consisting of all the categories the "network" associates with the given "mood"
-var consultNetwork = function(network, mood) {
-  var inputVector = makeOneArr(possibleMoods.length, possibleMoods.indexOf(mood));
+var consultNetwork = function(network, emoticons) {
+  var inputIndices = emoticonsToMoodIndices(emoticons);
+
+  var inputVector = makeOneArr(possibleMoods.length, inputIndices);
   var outputVector = network.activate(inputVector);
 
   var roundedOutput = roundEntries(outputVector);
 
   return roundedOutput.reduce(function(categories, nextOutputEntry, i) {
     if (nextOutputEntry === 1) {
-      return categories.concat(possibleCategories[i]);
+      if (i < possibleTypes.length) {
+        return categories.concat(possibleTypes[i]);
+      } else {
+        return categories.concat(possibleKeywords[i - possibleTypes.length]);
+      }
     }
 
     return categories;

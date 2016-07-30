@@ -3,47 +3,47 @@ var consultNetwork = require('./neuralHelpers').consultNetwork;
 
 var frontEndData = [
   {
-    mood: 'Happy',
-    category: 'Chipotle'
+    emoticons: {'Happy': 1},
+    selected: {type: 'Mexican', keyword: 'Chipotle'}
   },
   {
-    mood: 'Happy',
-    category: 'Chipotle'
+    emoticons: {'Happy': 1},
+    selected: {type: 'Mexican', keyword: 'Chipotle'}
   },
   {
-    mood: 'Happy',
-    category: 'Chipotle'
+    emoticons: {'Happy': 1},
+    selected: {type: 'Mexican', keyword: 'Chipotle'}
   },
   {
-    mood: 'Happy',
-    category: 'Chipotle'
+    emoticons: {'Happy': 1},
+    selected: {type: 'Mexican', keyword: 'Chipotle'}
   },
   {
-    mood: 'Sad',
-    category: 'Chipotle'
+    emoticons: {'Sad': 1},
+    selected: {type: 'Mexican', keyword: 'Chipotle'}
   },
   {
-    mood: 'Sad',
-    category: 'Italian'
+    emoticons: {'Sad': 1},
+    selected: {type: 'Italian', keyword: 'Pasta'}
   },
   {
-    mood: 'Sad',
-    category: 'Italian'
+    emoticons: {'Sad': 1},
+    selected: {type: 'Italian', keyword: 'Pasta'}
   },
   {
-    mood: 'Sad',
-    category: 'Italian'
+    emoticons: {'Sad': 1},
+    selected: {type: 'Italian', keyword: 'Pasta'}
   },
   {
-    mood: 'Happy',
-    category: 'Italian'
+    emoticons: {'Happy': 1},
+    selected: {type: 'Italian', keyword: 'Pasta'}
   },
   {
-    mood: 'Sad',
-    category: 'Romantic'
+    emoticons: {'Sad': 1},
+    selected: {type: 'Romantic', keyword: 'Expensive Wine'}
   }
 ];
 
 var sampleNetwork = createNetwork(frontEndData);
 
-console.log(consultNetwork(sampleNetwork, 'Happy'));
+console.log(consultNetwork(sampleNetwork, {'Happy': 1}));
