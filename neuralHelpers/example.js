@@ -46,4 +46,4 @@ var frontEndData = [
 
 var sampleNetwork = createNetwork(frontEndData);
 
-console.log(consultNetwork(sampleNetwork, {'Happy':1}));
+console.log(consultNetwork(sampleNetwork, {'Happy': 1}));
