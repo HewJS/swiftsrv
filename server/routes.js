@@ -20,6 +20,7 @@ module.exports = function (app, express){
   // the above functions while they are doing their thing
   app.post('/api/db', dbHandler.post);
   app.get('/api/db', dbHandler.get);
+  app.post('/api/brain', requestHandler.consult);
 
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'client','index.html'));

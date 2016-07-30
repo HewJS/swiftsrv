@@ -25,8 +25,14 @@
           <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">
         </div>
         <div class="row formBtn">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <button ng-hide='calculating' ng-Click="getLocationAndCategory(location, category)" class="btn btn-default center-block"> Adventure Time!</button>
+          </div>
+          <div class="formBtn">
+            <div class="col-md-6">
+              <button ng-Click="askJamie()" class="btn btn-default center-block">Consult da brain</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
