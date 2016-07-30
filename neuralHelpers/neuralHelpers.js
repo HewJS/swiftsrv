@@ -46,13 +46,7 @@ var roundEntries = function(arr) {
 // See "example.js" for an example of what the frontEndData looks like
 var frontEndToTrainingData = function(frontEndData) {
   return frontEndData.map(function(frontEndEntry) {
-    var moodsArr = Object.keys(frontEndEntry.emoticons).filter(function(emoticonKey) {
-      return frontEndEntry.emoticons[emoticonKey] === 1;
-    });
-
-    var inputIndices = moodsArr.map(function(mood) {
-      return possibleMoods.indexOf(mood);
-    });
+    var inputIndices = emoticonsToMoodIndices(frontEndEntry.emoticons);
 
     var outputIndex1 = possibleTypes.indexOf(frontEndEntry.selected.type);
     var outputIndex2 = possibleKeywords.indexOf(frontEndEntry.selected.keyword);
@@ -72,6 +66,18 @@ var frontEndToTrainingData = function(frontEndData) {
         [outputIndex1, possibleTypes.length + outputIndex2]
       )
     };
+  });
+};
+
+// Output: The result of converting the passed emoticons object
+// to its correponding mood indices
+var emoticonsToMoodIndices = function(emoticons) {
+  var moodsArr = Object.keys(emoticons).filter(function(emoticonKey) {
+    return emoticons[emoticonKey] === 1;
+  });
+
+  return moodsArr.map(function(mood) {
+    return possibleMoods.indexOf(mood);
   });
 };
 
@@ -96,13 +102,7 @@ var createNetwork = function(frontEndData) {
 
 // Output: A sting consisting of all the categories the "network" associates with the given "mood"
 var consultNetwork = function(network, emoticons) {
-  var moodsArr = Object.keys(emoticons).filter(function(emoticonKey) {
-    return emoticons[emoticonKey] === 1;
-  });
-
-  var inputIndices = moodsArr.map(function(mood) {
-    return possibleMoods.indexOf(mood);
-  });
+  var inputIndices = emoticonsToMoodIndices(emoticons);
 
   var inputVector = makeOneArr(possibleMoods.length, inputIndices);
   var outputVector = network.activate(inputVector);
