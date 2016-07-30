@@ -28,6 +28,7 @@ module.exports = function(grunt) {
       client: 'client/app/**/*.js',
       server: 'server/**/*.js',
       options: {
+        reporterOutput: "",
         globals: {
           eqeqeq: true
         }
