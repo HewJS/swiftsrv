@@ -7,9 +7,10 @@ var Trainer = synaptic.Trainer;
 var Architect = synaptic.Architect;
 
 // These can be changed at your leisure!
-// In particular, the first category is the 'default' category
+// In particular, the first type/keyword is the 'default' type/keyword
 var possibleMoods = ['Happy', 'Sad'];
-var possibleCategories = ['Popular', 'Italian', 'Chipotle'];
+var possibleTypes = ['Popular', 'Italian', 'Mexican'];
+var possibleKeywords = ['', 'Pasta', 'Chipotle'];
 
 // Output: An array of zeros of length n
 var zerosArr = function(n, currArr) {
@@ -22,10 +23,16 @@ var zerosArr = function(n, currArr) {
   return zerosArr(n-1, currArr.concat([0]));
 };
 
-// Output: An array of zeros of length n, save for a 1 at the ith index
-var makeOneArr = function(n, i) {
+// Output: An array of zeros of length n, save for a 1 at the "indices"
+var makeOneArr = function(n, indices) {
   var blankArr = zerosArr(n);
-  blankArr[i] = 1;
+
+  blankArr.forEach(function(entry, i) {
+    if (indices.indexOf(i) >= 0) {
+      blankArr[i] = 1;
+    }
+  });
+
   return blankArr;
 };
 
@@ -39,16 +46,31 @@ var roundEntries = function(arr) {
 // See "example.js" for an example of what the frontEndData looks like
 var frontEndToTrainingData = function(frontEndData) {
   return frontEndData.map(function(frontEndEntry) {
-    var inputIndex = possibleMoods.indexOf(frontEndEntry.mood);
-    var outputIndex = possibleCategories.indexOf(frontEndEntry.category);
+    var moodsArr = Object.keys(frontEndEntry.emoticons).filter(function(emoticonKey) {
+      return frontEndEntry.emoticons[emoticonKey] === 1;
+    });
 
-    if (outputIndex === -1) {
-      outputIndex = 0;
+    var inputIndices = moodsArr.map(function(mood) {
+      return possibleMoods.indexOf(mood);
+    });
+
+    var outputIndex1 = possibleTypes.indexOf(frontEndEntry.selected.type);
+    var outputIndex2 = possibleKeywords.indexOf(frontEndEntry.selected.keyword);
+
+    if (outputIndex1 === -1) {
+      outputIndex1 = 0;
+    }
+
+    if (outputIndex2 === -1) {
+      outputIndex2 = 0;
     }
 
     return {
-      input: makeOneArr(possibleMoods.length, inputIndex),
-      output: makeOneArr(possibleCategories.length, outputIndex)
+      input: makeOneArr(possibleMoods.length, inputIndices),
+      output: makeOneArr(
+        possibleTypes.length + possibleKeywords.length,
+        [outputIndex1, possibleTypes.length + outputIndex2]
+      )
     };
   });
 };
@@ -57,8 +79,8 @@ var frontEndToTrainingData = function(frontEndData) {
 var createNetwork = function(frontEndData) {
   var newNet = new Architect.Perceptron(
     possibleMoods.length,
-    Math.max(possibleMoods.length, possibleCategories.length),
-    possibleCategories.length
+    Math.max(possibleMoods.length, possibleTypes.length + possibleKeywords.length),
+    possibleTypes.length + possibleKeywords.length
   );
 
   var trainingOptions = {
@@ -73,15 +95,27 @@ var createNetwork = function(frontEndData) {
 };
 
 // Output: A sting consisting of all the categories the "network" associates with the given "mood"
-var consultNetwork = function(network, mood) {
-  var inputVector = makeOneArr(possibleMoods.length, possibleMoods.indexOf(mood));
+var consultNetwork = function(network, emoticons) {
+  var moodsArr = Object.keys(emoticons).filter(function(emoticonKey) {
+    return emoticons[emoticonKey] === 1;
+  });
+
+  var inputIndices = moodsArr.map(function(mood) {
+    return possibleMoods.indexOf(mood);
+  });
+
+  var inputVector = makeOneArr(possibleMoods.length, inputIndices);
   var outputVector = network.activate(inputVector);
 
   var roundedOutput = roundEntries(outputVector);
 
   return roundedOutput.reduce(function(categories, nextOutputEntry, i) {
     if (nextOutputEntry === 1) {
-      return categories.concat(possibleCategories[i]);
+      if (i < possibleTypes.length) {
+        return categories.concat(possibleTypes[i]);
+      } else {
+        return categories.concat(possibleKeywords[i - possibleTypes.length]);
+      }
     }
 
     return categories;
