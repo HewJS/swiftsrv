@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 // Dataset will be a collection of data from the front end
 // based on user input and the destination eventually `picked'
@@ -15,4 +15,4 @@ const dataSchema = new mongoose.Schema({
 
 const DataEntry = mongoose.model('DataEntry', dataSchema);
 
-export { DataEntry };
+module.exports = { DataEntry };
