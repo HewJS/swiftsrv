@@ -9,4 +9,4 @@ db.once('open', () => {
   console.log('MongoDB connection successful');
 });
 
-module.exports = { db };
+module.exports = db;

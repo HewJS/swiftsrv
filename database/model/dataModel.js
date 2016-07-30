@@ -8,11 +8,11 @@ const mongoose = require('mongoose');
 // }
 // This can and will change
 
-const dataSchema = new mongoose.Schema({
+const dataSchema = mongoose.Schema({
   emoticons: Object,
   selected: Object
 });
 
 const DataEntry = mongoose.model('DataEntry', dataSchema);
 
-module.exports = { DataEntry };
+module.exports = DataEntry;

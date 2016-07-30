@@ -3,18 +3,18 @@ const DataEntry = require('../database/model/dataModel');
 
 const get = (req, res) => {
   DataEntry.find((err, users) => {
-    res.send(200, users);
+    res.status(200).send(users);
   });
 };
 
 const post = (req, res) => {
-  const dataPoint = new DataEntry({
-    emoticons: req.emoticons,
-    selected: req.selected
-  });
-  dataPoint.save((err, datum) => {
+  const dataPoint = {
+    emoticons: req.body.emoticons,
+    selected: req.body.selected
+  };
+  DataEntry.create(dataPoint, (err, datum) => {
     if (err) { console.error(err); }
-    res.send(201, datum);
+    res.status(201).send(datum);
   });
 };
 
