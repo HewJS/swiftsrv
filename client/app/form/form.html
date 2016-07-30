@@ -13,6 +13,14 @@
             <button ng-Click="findMe()" class="btn btn-default center-block">Use Current Location</button>
             <div ng-show='calculating'> Calculating Current Location.. </div>
         </div>
+        <div class="emotes">
+          <form>
+            <label ng-repeat="(key, v) in brain.emoticons"> {{key}}
+              <input type="checkbox" ng-model="brain.emoticons[key]">
+            </label>
+          </form>
+          {{brain.emoticons}}
+        </div>
         <div class="formSpacing">
           <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">
         </div>

@@ -18,4 +18,15 @@ const post = (req, res) => {
   });
 };
 
-module.exports = { get, post };
+const create = (params) => {
+  const dataPoint = {
+    emoticons: params.emoticons,
+    selected: params.term
+  };
+  Object.keys(dataPoint.emoticons).forEach(moodKey => dataPoint.emoticons[moodKey] = +dataPoint.emoticons[moodKey]);
+  DataEntry.create(dataPoint, (err) => {
+    if (err) { console.error(err); }
+  });
+};
+
+module.exports = { get, post, create };
