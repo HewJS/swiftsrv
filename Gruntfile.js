@@ -114,7 +114,7 @@ module.exports = function(grunt) {
   });
 
   // Perform a build
-  grunt.registerTask('build', [ 'jshint', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('build', ['clean', 'concat', 'uglify']);
 
   // Run client tests once
   grunt.registerTask('test', [ 'karma:single' ]);
