@@ -27,7 +27,9 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
             ratingImg: datum.rating_img_url,
             reviewCount: datum.review_count,
             snippet: datum.snippet,
-            location: datum.location
+            location: datum.location,
+            eat24: datum.eat24_url,
+            reservation: datum.reservation_url
           };
         });
         //orders by review count

@@ -36,6 +36,12 @@
           <div class="btn-group" role="group">
             <button class="btn btn-default" id="uber" ng-click='getUber(data.location.coordinate)'>Uber</button>
           </div>
+          <div class="btn-group" role="group" ng-if="!!data.eat24">
+            <button class="btn btn-default" id="order" ng-Click="orderFood()">Order delivery!</button>
+          </div>
+          <div class="btn-group" role="group" ng-if="!!data.reservation">
+            <button class="btn btn-default" id="order" ng-Click="reserve()">Make reservation!</button>
+          </div>
           <div class="btn-group" role="group">
             <button class="btn btn-default" id="tryThis" ng-Click="googleRedirect()">Challenge Accepted!</button>
           </div>
