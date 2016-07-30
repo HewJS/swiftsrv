@@ -10,9 +10,17 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
     $scope.cllYelp = undefined;
     $scope.calculating = false;
     $scope.location = undefined;
+    $scope.brain = {
+      emoticons: {
+        happy: false,
+        sad: false,
+        crying: false,
+        lazy: false
+      }
+    };
 
     $scope.getLocationAndCategory = function(location, category){
-      Adventures.requestAdventures(location, category, $scope.cllYelp)
+      Adventures.requestAdventures(location, category, $scope.cllYelp, $scope.brain)
         .then(function(data) {
           console.log(data);
           return true;

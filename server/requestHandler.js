@@ -4,11 +4,11 @@ var request = require('request');
 var _ = require('lodash');
 var UBER = require('node-uber');
 var n = require('nonce');
+var dbHandler = require('./dbHandler');
 // THE FOLLOWING FILES ARE FOR CONFIGS FOR UBER AND YELP
 // YOU MUST MAKE YOUR OWN ACCOUNTS AND PUT THE INFORMATION IN THE
 // .CONFIG file.  THEN, UNCOMMENT THIS TO CONNECT IT.
-// var Yelp = require('./config.js').Yelp;
-// var uberConfig = require('./config.js').Uber;
+
 
 var ts = () => Date.now();
 var non = n();
@@ -38,6 +38,8 @@ if(process.env.PORT){
   };
 } else {
   host = "http://localhost:3000";
+  var Yelp = require('./config.js').Yelp;
+  var uberConfig = require('./config.js').Uber;
 }
 
 
@@ -70,7 +72,13 @@ module.exports = {
   getYelp: function(req, res, next){
     console.log('req body is: ', req.body);
     //data: {category: "", location: ""}
-    var yelpURL = constructQuery(req.body);
+    let query = {
+      term: req.body.term,
+      location: req.body.location
+    };
+    var yelpURL = constructQuery(query);
+
+    dbHandler.create(_.extend(req.body.brain, { term: { type: req.body.term } }));
 
     request(yelpURL, function(err, response, body){
       //send GET request to YELP API, receive YELP result in response

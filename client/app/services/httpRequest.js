@@ -3,7 +3,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     //http requests
     /******************************/
     //GET Request to server side for venues base on local and category
-    var requestAdventures = function(location, category, cll){
+    var requestAdventures = function(location, category, cll, brain){
 
       var url = '/api/getYelp';
 
@@ -13,7 +13,8 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
         data: JSON.stringify({
           term: category,
           location: location,
-          cll: cll
+          cll: cll,
+          brain: brain
         })
       }).then(function(resp){
         //strips away unused yelp data
