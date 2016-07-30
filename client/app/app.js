@@ -1,17 +1,17 @@
-angular.module("sqrtl", [
-    "sqrtl.httpRequest",
-    "sqrtl.form",
-    "sqrtl.adventure",
-    "sqrtl.uber",
-    "ui.router",
-    "ngRoute",
-    "ui.bootstrap",
-    "ngLodash",
-    "stormpath",
-    "stormpath.templates",
-    "uiGmapgoogle-maps",
-    "ngTouch"
-  ])
+angular.module('sqrtl', [
+  'sqrtl.httpRequest',
+  'sqrtl.form',
+  'sqrtl.adventure',
+  'sqrtl.uber',
+  'ui.router',
+  'ngRoute',
+  'ui.bootstrap',
+  'ngLodash',
+  'stormpath',
+  'stormpath.templates',
+  'uiGmapgoogle-maps',
+  'ngTouch'
+])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
     $urlRouterProvider
@@ -62,7 +62,7 @@ angular.module("sqrtl", [
 
   })
   .run(function($stormpath, $rootScope, $state){
-    //informs stormpath what state associates with login 
+    //informs stormpath what state associates with login
     //and where to state to take afterwards
     $stormpath.uiRouter({
       loginState: 'login',

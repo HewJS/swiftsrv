@@ -7,13 +7,12 @@ var n = require('nonce');
 // THE FOLLOWING FILES ARE FOR CONFIGS FOR UBER AND YELP
 // YOU MUST MAKE YOUR OWN ACCOUNTS AND PUT THE INFORMATION IN THE
 // .CONFIG file.  THEN, UNCOMMENT THIS TO CONNECT IT.
-// var Yelp = require('./config.js').Yelp;
-// var uberConfig = require('./config.js').Uber;
+var Yelp = require('./config.js').Yelp;
+var uberConfig = require('./config.js').Uber;
 
-
-var ts = Date.now();
+var ts = () => Date.now();
 var non = n();
-var host = "";
+var host;
 
 if(process.env.PORT){
   host = "https://swiftsrv.herokuapp.com";
@@ -24,7 +23,7 @@ if(process.env.PORT){
     oauth_token: process.env.YELP_OAUTH,
     tokensecret: process.env.YELP_TOKEN,
     oauth_signature_method: "HMAC-SHA1",
-    oauth_timestamp: ts,
+    oauth_timestamp: ts(),
     oauth_nonce: non(),
     oauth_version: "1.0"
   };
@@ -47,9 +46,10 @@ var Uber = new UBER(uberConfig);
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
 
-  var params = {  limit: 20,
-                  sort: 2
-                  };
+  var params = {
+    limit: 20,
+    sort: 2
+  };
 
   var fullParams = _.extend(params, searchParam, Yelp);
 
@@ -96,17 +96,17 @@ module.exports = {
 
   uberRedir: function(req, res, next){
 
-      Uber.authorization({
-       authorization_code: req.query.code
-     }, function(err, access_token, refresh_token) {
-       if (err) {
-         console.error(err);
-       } else {
-         // store the user id and associated access token
-         // redirect the user back to your actual app
-         res.redirect('/#/uber');
-       }
-     });
+    Uber.authorization({
+      authorization_code: req.query.code
+    }, function(err, access_token, refresh_token) {
+      if (err) {
+        console.error(err);
+      } else {
+        // store the user id and associated access token
+        // redirect the user back to your actual app
+        res.redirect('/#/uber');
+      }
+    });
 
   },
 
@@ -123,10 +123,9 @@ module.exports = {
       }
     });
 
-
   },
 
-   uberRide: function(req, res, next){
+  uberRide: function(req, res, next){
 
     console.log("Ride info is ", req.body);
 
@@ -147,6 +146,4 @@ module.exports = {
 
   },
 
-
 };
-

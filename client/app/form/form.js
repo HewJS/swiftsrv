@@ -30,12 +30,12 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
       $scope.calculating = true;
       Adventures.geoFindMe(function(success){
         $scope.$apply(function(){
-           $scope.cll = {latitude: success.coords.latitude, longitude: success.coords.longitude};
-           $scope.cllYelp = success.coords.latitude + "," + success.coords.longitude;
-           LocationFactory.setCoordinates($scope.cll);
-           console.log("cll", $scope.cll);
-           $scope.reverseGeocode();
-           $scope.calculating = false;
+          $scope.cll = {latitude: success.coords.latitude, longitude: success.coords.longitude};
+          $scope.cllYelp = success.coords.latitude + "," + success.coords.longitude;
+          LocationFactory.setCoordinates($scope.cll);
+          console.log("cll", $scope.cll);
+          $scope.reverseGeocode();
+          $scope.calculating = false;
         });
       });
     };
@@ -54,7 +54,5 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
         }
       });
     };
-
-
 
   });

@@ -10,7 +10,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   //gets distance to venue and formats it to kilometers,
   //it will not render to the page if the distance isnt availible
   var distance = LocationFactory.findDistance($scope.data.location.coordinate);
-  distance? $scope.distance = distance + 'km' : $scope.distance = undefined;
+  distance ? $scope.distance = distance + 'km' : $scope.distance = undefined;
 
   //assigns the coordinates and google maps url
   $scope.address = {
@@ -27,7 +27,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     Adventures.dataShift();
     $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
     var distance = LocationFactory.findDistance($scope.data.location.coordinate);
-    distance? $scope.distance = distance + 'km' : $scope.distance = undefined;
+    distance ? $scope.distance = distance + 'km' : $scope.distance = undefined;
   };
 
   //requsts uber with you coordinates and then redirects your to ubers login
@@ -53,6 +53,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   };
 
 });
+
 
 
 
