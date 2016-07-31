@@ -15,10 +15,11 @@
         </div>
         <div class="emotes">
           <form>
-            <label ng-repeat="(key, v) in brain.emoticons"> {{key}}
+            <label ng-repeat="(key, v) in brain.emoticons" class={{key}}>
               <input type="checkbox" ng-model="brain.emoticons[key]">
             </label>
           </form>
+          <div>{{brain.emoticons}}</div>
         </div>
         <div class="formSpacing">
           <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">

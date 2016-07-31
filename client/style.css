@@ -41,3 +41,12 @@ body {
 
 .angular-google-map-container { height: 200px;
                                 width: 200px; }
+input[type=checkbox]{
+  display: none;
+}
+
+.happy{
+  height: 20px;
+  width: 20px;
+  background-image: url('/app/form/emojis/happy.png');
+}
