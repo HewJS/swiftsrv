@@ -9,9 +9,9 @@ var Architect = synaptic.Architect;
 
 // These can be changed at your leisure!
 // In particular, the first type/keyword is the 'default' type/keyword
-var possibleMoods = ['Happy', 'Sad'];
-var possibleTypes = ['Popular', 'Italian', 'Mexican'];
-var possibleKeywords = ['', 'Pasta', 'Chipotle'];
+var possibleMoods = ['happy', 'sad', 'crying', 'lazy', 'energetic', 'drunk', 'nervous', 'tired', 'angry', 'sick', 'smug'];
+var possibleTypes = ['Popular', 'Italian', 'Mexican', 'Desserts', 'Delivery', 'Juice bar', 'Fast food', 'Tea room', 'Coffee', 'Crabs', 'Soup', 'French', 'Pasta', 'Chipotle'];
+var possibleKeywords = [''];
 
 // Output: An array of zeros of length n, save for a 1 at the "indices"
 var makeOneArr = function(n, indices) {
@@ -77,7 +77,7 @@ var createNetwork = function(frontEndData) {
     rate: .1,
     iterations: 20000,
     error: .005,
-  }
+  };
 
   newNet.trainer.train(frontEndToTrainingData(frontEndData), trainingOptions);
 
@@ -90,6 +90,11 @@ var consultNetwork = function(network, emoticons) {
 
   var inputVector = makeOneArr(possibleMoods.length, inputIndices);
   var outputVector = network.activate(inputVector);
+
+  // // shows the output vector
+  // for (var i = outputVector.length - 1; i >= 0; i--) {
+  //   console.log(outputVector[i], possibleTypes.concat(possibleKeywords)[i]);
+  // }
 
   var roundedOutput = roundEntries(outputVector);
 
