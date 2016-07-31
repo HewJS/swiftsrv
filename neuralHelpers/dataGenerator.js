@@ -24,7 +24,7 @@ function generator(n) {
       selected: { type: '' }
     };
 
-    let len = randomN(3);
+    let len = randomN(2);
     _.shuffle(possibleMoods).slice(0, len).forEach((mood) => {
       entry.emoticons[mood] = 1;
       if (conform()) {
