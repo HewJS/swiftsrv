@@ -111,4 +111,14 @@ var consultNetwork = function(network, emoticons) {
   }, []).join(' ');
 };
 
-module.exports = { createNetwork, consultNetwork };
+// Output: A JSON representation of a Synaptic neural network
+var networkToJSON = function(network) {
+  return network.toJSON();
+};
+
+// Output: The Synaptic neural network represented by the provided JSON
+var networkFromJSON = function(json) {
+  return Network.fromJSON(json);
+};
+
+module.exports = { createNetwork, consultNetwork, networkToJSON, networkFromJSON };
