@@ -5,6 +5,9 @@ var _ = require('lodash');
 var UBER = require('node-uber');
 var n = require('nonce');
 var dbHandler = require('./dbHandler');
+var createNetwork = require('../neuralHelpers/neuralHelpers').createNetwork;
+var consultNetwork = require('../neuralHelpers/neuralHelpers').consultNetwork;
+var generate = require('../neuralHelpers/dataGenerator');
 // THE FOLLOWING FILES ARE FOR CONFIGS FOR UBER AND YELP
 // YOU MUST MAKE YOUR OWN ACCOUNTS AND PUT THE INFORMATION IN THE
 // .CONFIG file.  THEN, UNCOMMENT THIS TO CONNECT IT.
@@ -156,10 +159,14 @@ module.exports = {
 
   consult: function(req, res, next) {
 
-    console.log('I`m feeling: ', req.body);
+    Object.keys(req.body.emoticons).forEach(moodKey => req.body.emoticons[moodKey] = +req.body.emoticons[moodKey]);
+    console.log('I`m feeling: ', req.body.emoticons);
 
+    var sampleNetwork = createNetwork(generate(50));
+    var result = consultNetwork(sampleNetwork, req.body.emoticons);
+    console.log('almighty says: ', result);
     let response = {
-      type: 'JUST DO IT'
+      type: result
     };
 
     res.status(201).send(response);
