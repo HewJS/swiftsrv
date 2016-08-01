@@ -30,7 +30,8 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
             snippet: datum.snippet,
             location: datum.location,
             eat24: datum.eat24_url,
-            reservation: datum.reservation_url
+            reservation: datum.reservation_url,
+            phone: datum.display_phone
           };
         });
         //orders by review count
