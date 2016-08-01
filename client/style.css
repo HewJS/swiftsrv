@@ -45,8 +45,13 @@ input[type=checkbox] {
   display: none;
 }
 
-input[type=checkbox]:checked > label {
+/*input[type=checkbox]:checked > label {
   background-color: black;
+}*/
+
+.selected {
+  border-radius: 50%;
+  border: 2px solid black;
 }
 
 .happy, .sad, .crying, .lazy, .energetic, .drunk, .nervous, .tired, .angry, .sick, .smug {
@@ -58,10 +63,6 @@ input[type=checkbox]:checked > label {
 
 .happy:hover, .sad:hover, .crying:hover, .lazy:hover, .energetic:hover, .drunk:hover, .nervous:hover, .tired:hover, .angry:hover, .sick:hover, .smug:hover {
   border: 1px solid black;
-}
-
-.happy:active, .sad:active, .crying:active, .lazy:active, .energetic:active, .drunk:active, .nervous:active, .tired:active, .angry:active, .sick:active, .smug:active {
-  background-color: black;
 }
 
 .happy {
