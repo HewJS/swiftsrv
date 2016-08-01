@@ -1,14 +1,19 @@
 var neuralHelpers = require('../neuralHelpers/neuralHelpers');
 var findAllAsync = require('./dbHandler.js').findAllAsync;
-var fs = require('fs');
 
-var network = neuralHelpers.networkFromJSON(JSON.parse(fs.readFileSync(__dirname + '/../neuralHelpers/sampleNetwork.json', 'utf-8')));
+var network;
 
 findAllAsync(data => {
+  console.log('training neural network');
   network = neuralHelpers.createNetwork(data);
-  fs.writeFile(__dirname + '/../neuralHelpers/sampleNetwork.json', JSON.stringify(neuralHelpers.networkToJSON(network)));
+  console.log('training neural network - done');
 });
 
-console.log(neuralHelpers.consultNetwork(network, { emoticons: { angry: 1 }}));
-
-module.exports = network;
+module.exports = function(callback, query, res) {
+  if (network) {
+    var result = neuralHelpers.consultNetwork(network, query);
+    callback(result, res);
+  } else {
+    res.status(201).send();
+  }
+};
