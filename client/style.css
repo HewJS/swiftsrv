@@ -45,11 +45,23 @@ input[type=checkbox] {
   display: none;
 }
 
+input[type=checkbox]:checked > label {
+  background-color: black;
+}
+
 .happy, .sad, .crying, .lazy, .energetic, .drunk, .nervous, .tired, .angry, .sick, .smug {
   height: 30px;
   width: 30px;
   background-size: contain;
   margin: 20px 13px 0px 17px;
+}
+
+.happy:hover, .sad:hover, .crying:hover, .lazy:hover, .energetic:hover, .drunk:hover, .nervous:hover, .tired:hover, .angry:hover, .sick:hover, .smug:hover {
+  border: 1px solid black;
+}
+
+.happy:active, .sad:active, .crying:active, .lazy:active, .energetic:active, .drunk:active, .nervous:active, .tired:active, .angry:active, .sick:active, .smug:active {
+  background-color: black;
 }
 
 .happy {
@@ -101,5 +113,43 @@ input[type=checkbox] {
   background: #d3d3d3;
   border-radius: 4px;
   padding-bottom: 11px;
+  padding-left: 20px;
   border: 2px solid black;
+}
+
+/*.feeling {
+  margin: auto;
+  background-color: black;
+  width: 40px;
+  color: white;
+}
+*/
+
+.feeling {
+  border: 1px solid black;
+  margin-top: 20px;
+  margin: 20px auto auto auto;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  background-image: url('/app/form/emojis/happy.png');
+  background-size: contain;
+  transition: background-image 0.25s ease-in;
+}
+
+.feeling:hover {
+  background-color: #d3d3d3;
+  background-image: url('/app/form/emojis/nervous.png');
+}
+
+.feeling:active {
+  background-image: url('/app/form/emojis/drunk.png');
+}
+
+.chosenEmotes {
+  width: 335px;
+  height: 44px;
+  border-radius: 4px;
+  background-color: #d3d3d3;
+  border-radius: 2px solid dashed;
 }

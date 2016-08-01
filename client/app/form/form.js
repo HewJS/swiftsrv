@@ -85,4 +85,9 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
     $scope.emoji = !$scope.emoji;
   }
 
+  // $scope.addEmoji = function(value) {
+  //   $scope.chosen.push(value);
+  //   console.log($scope.chosen);
+  // }
+
 });
