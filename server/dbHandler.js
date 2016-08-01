@@ -29,4 +29,10 @@ const create = (params) => {
   });
 };
 
-module.exports = { get, post, create };
+const findAllAsync = (callback) => {
+  DataEntry.find((err, data) => {
+    if (!err) { callback(data); }
+  });
+};
+
+module.exports = { get, post, create, findAllAsync };
