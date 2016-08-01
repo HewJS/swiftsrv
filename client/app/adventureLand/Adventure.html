@@ -1,4 +1,4 @@
-<div class="container viewsContainer">
+<div class="container viewsContainer outlined">
 
 
   <div class="row headingRow">
@@ -12,7 +12,7 @@
       <div class="col-md-2"><h3 id="distance">{{distance}}</h3></div>
       <div class="col-md-2"> <h3 id="reviewCount">{{data.reviewCount}} reviews!</h3></div>
       <div class="col-md-2"><h3 id="reviewRating">{{data.rating}}</h3><img id="starImage" ng-src="{{data.ratingImg}}"></div>
-      <div class="col-md-2 center-block"><h3 ng-Click="moreDetails()">Click for More Details!</a></div>
+      <div class="col-md-2 center-block details"><h3 ng-Click="moreDetails()">Click for More Details!</a></div>
       <div class="col-md-2">
         <h3>Status: <span ng-if="data.isClosed">Closed</span> <span ng-if="!data.isClosed">Open</span></h3>
       </div>
