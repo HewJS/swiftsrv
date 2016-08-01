@@ -10,6 +10,7 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
   $scope.cllYelp = undefined;
   $scope.calculating = false;
   $scope.location = undefined;
+  $scope.emoji = false;
   $scope.brain = {
     emoticons: {
       happy: false,
@@ -79,5 +80,9 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
       $scope.category = res.data.type;
     });
   };
+
+  $scope.showEmoji = function() {
+    $scope.emoji = !$scope.emoji;
+  }
 
 });

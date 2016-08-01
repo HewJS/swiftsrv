@@ -100,4 +100,6 @@ input[type=checkbox] {
   margin-top: 23px;
   background: #d3d3d3;
   border-radius: 4px;
+  padding-bottom: 11px;
+  border: 2px solid black;
 }
