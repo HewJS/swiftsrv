@@ -40,7 +40,7 @@ function generator(n) {
 }
 
 function randomN(n) {
-  return Math.floor(Math.random() * n+1) + 1;
+  return Math.floor(Math.random() * n) + 1;
 }
 
 function conform() {
