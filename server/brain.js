@@ -5,6 +5,7 @@ var network;
 
 findAllAsync(data => {
   console.log('training neural network');
+  data = data.filter(entry => (entry.emoticons && entry.selected));
   network = neuralHelpers.createNetwork(data);
   console.log('training neural network - done');
 });
