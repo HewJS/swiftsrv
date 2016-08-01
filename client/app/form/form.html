@@ -15,7 +15,7 @@
         </div>
         <div class="emotes">
           <form>
-            <label ng-repeat="(key, v) in brain.emoticons" class={{key}}>
+            <label ng-repeat="(key, v) in brain.emoticons" class={{key}} title={{key}}>
               <input type="checkbox" ng-model="brain.emoticons[key]">
             </label>
           </form>

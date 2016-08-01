@@ -41,12 +41,63 @@ body {
 
 .angular-google-map-container { height: 200px;
                                 width: 200px; }
-input[type=checkbox]{
+input[type=checkbox] {
   display: none;
 }
 
-.happy{
-  height: 20px;
-  width: 20px;
+.happy, .sad, .crying, .lazy, .energetic, .drunk, .nervous, .tired, .angry, .sick, .smug {
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+  margin: 20px 13px 0px 17px;
+}
+
+.happy {
   background-image: url('/app/form/emojis/happy.png');
+}
+
+.sad {
+  background-image: url('/app/form/emojis/sad.png');
+}
+
+.crying {
+  background-image: url('/app/form/emojis/crying.png');
+}
+
+.lazy {
+  background-image: url('/app/form/emojis/lazy.png');
+}
+
+.energetic {
+  background-image: url('/app/form/emojis/energetic.png');
+}
+
+.drunk {
+  background-image: url('/app/form/emojis/drunk.png');
+}
+
+.nervous{
+  background-image: url('/app/form/emojis/nervous.png');
+}
+
+.tired {
+  background-image: url('/app/form/emojis/tired.png');
+}
+
+.angry {
+  background-image: url('/app/form/emojis/angry.png');
+}
+
+.sick {
+  background-image: url('/app/form/emojis/sick.png');
+}
+
+.smug{
+  background-image: url('/app/form/emojis/smug.png');
+}
+
+.emotes {
+  margin-top: 23px;
+  background: #d3d3d3;
+  border-radius: 4px;
 }
