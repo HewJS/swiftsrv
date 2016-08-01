@@ -16,7 +16,7 @@
         <div ckass="feeling text-center" ng-Click="showEmoji()">
           How are you feeling today?
         </div>
-        <div class="emotes" ng-if="emoji">
+        <div class="emotes" ng-if="emoji" ngfx-flip-in-x="emoji" >
           <form>
             <label ng-repeat="(key, v) in brain.emoticons" class={{key}} title={{key}}>
               <input type="checkbox" ng-model="brain.emoticons[key]">
